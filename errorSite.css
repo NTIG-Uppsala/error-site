@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    background-image: url("backgroundNTI.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+
+@font-face {
+    font-family: font;
+    src: url("/PlayfairDisplay-VariableFont_wght.ttf");
+}
+
+
+h2 {
+    position: absolute;
+    font-size: 2rem;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: font;
+    color: white;
+}
+
+h1 {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    color: white;
+    font-size: 3rem;
+    transform: translate(-50%, -50%);
+    font-family: font;
+}
+
+#logo {
+    margin-left: 30px;
+    float: left;
+    right: 93%
+}
+
+#te4logo {
+    margin-right: 30px;
+    float: right;
+    left: 91%
+}
+
+#logo {
+    margin-top: 38px;
+}
+
+.footer {
+    margin-top: 5%;
+}
