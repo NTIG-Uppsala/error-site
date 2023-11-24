@@ -27,6 +27,7 @@ axios
 
     if (response.status != 200 && siteOpen === false) {
       // Opening the site with the export DISPLAY command
+      console.log("Opening error site")
       console.log("Status code:", response.status);
       siteOpen = true;
       fs.writeFileSync(siteOpenFilePath, "true");
@@ -46,9 +47,9 @@ axios
       );
       console.log(errorSite);
     } else if (response.status != 200 && siteOpen === true) {
-      console.log("Error");
+      console.log("Error site already open");
     } else if (response.status === 200 && serverSiteOpen === false) {
-      console.log("server up and running");
+      console.log("Server up and running");
       exec(
         `${displayCommand} && chromium-browser ${url} --kiosk`,
         (error, stdout, stderr) => {
