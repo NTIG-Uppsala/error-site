@@ -8,12 +8,15 @@ const headers = {};
 
 const displayCommand = "export DISPLAY=:0.0";
 
-let siteOpen = fs.existsSync("siteOpen.txt")
-  ? fs.readFileSync("siteOpen.txt", "utf8") === "true"
+const siteOpenFilePath = "/var/www/html/siteOpen.txt";
+const serverSiteOpenFilePath = "/var/www/html/serverSiteOpen.txt";
+
+let siteOpen = fs.existsSync(siteOpenFilePath)
+  ? fs.readFileSync(siteOpenFilePath, "utf8") === "true"
   : false;
 
-let serverSiteOpen = fs.existsSync("serverSiteOpen.txt")
-  ? fs.readFileSync("serverSiteOpen.txt", "utf8") === "true"
+let serverSiteOpen = fs.existsSync(serverSiteOpenFilePath)
+  ? fs.readFileSync(serverSiteOpenFilePath, "utf8") === "true"
   : false;
 
 axios
@@ -26,7 +29,9 @@ axios
       // Opening the site with the export DISPLAY command
       console.log("Status code:", response.status);
       siteOpen = true;
-      fs.writeFileSync("siteOpen.txt", "true");
+      fs.writeFileSync(siteOpenFilePath, "true");
+      siteOpen = false;
+      fs.writeFileSync(siteOpenFilePath, "false");
 
       exec(
         `${displayCommand} && chromium-browser ${errorSite} --kiosk`,
@@ -53,9 +58,9 @@ axios
           } else {
             console.log(stdout, stderr);
             serverSiteOpen = true;
-            fs.writeFileSync("serverSiteOpen.txt", "true");
+            fs.writeFileSync(serverSiteOpenFilePath, "true");
             siteOpen = false;
-            fs.writeFileSync("siteOpen.txt", "false");
+            fs.writeFileSync(siteOpenFilePath, "false");
           }
         }
       );
@@ -74,9 +79,9 @@ axios
           }
           console.log("Chromium closed/opened successfully");
           siteOpen = true;
-          fs.writeFileSync("siteOpen.txt", "true");
+          fs.writeFileSync(siteOpenFilePath, "true");
           serverSiteOpen = false;
-          fs.writeFileSync("serverSiteOpen.txt", "false");
+          fs.writeFileSync(serverSiteOpenFilePath, "false");
         }
       );
     }
